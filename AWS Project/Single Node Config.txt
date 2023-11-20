@@ -1,0 +1,57 @@
+Single Node Instances:
+
+Launch EC2 instance of Linux OS server.
+
+Apache Installation Steps:
+------------------------------------------
+yum -y update
+yum -y install httpd
+
+Enable and start httpd service
+------------------------------
+systemctl enable httpd.service
+systemctl start httpd.service
+
+Verify appache service:
+------------------------------
+systemctl status httpd
+
+Install MariaDB Packages:
+------------------------------
+yum -y install mariadb-server
+
+Enable and start mariadb service
+------------------------------
+systemctl enable mariadb.service
+systemctl start mariadb.service
+
+Verify mariadb service:
+------------------------------
+systemctl status mariadb.service
+
+Enable PHP Repos to install PHP packages
+------------------------------------------
+cd /var/tmp
+wget https://dl.fedoraproject.org/pub/epel-release-latest-7.noarch.rpm
+wget https://mirror.webtatic.com/yum/el7/webtatic-release.rpm   --> to download the RPM's
+Install the RPM's
+rpm -Uvh epel-release-latest-7.noarch.rpm
+rpm -Uvh webtatic-release.rpm
+yum install php56w php56w-opcache php56w-mysql php56w-curl php56w-xml php56w-mcrypt php56w-gd -y
+check the php version of the server installed - php -v
+
+Download the application packages for OrangeHRM
+-------------------------------------------------
+Explanation: /var/www is the default path or the base directory for the web servers.
+cd /var/tmp
+wget http://nchc.dl.sourceforge.net/project/orangehrm/stable/3.3.2/orangehrm-3.3.2.zip  --> Download the zip file
+unzip orangehrm-3.3.2.zip  -->Unzip the zip file
+mv orangehrm-3.3.2 /var/www/orangehrm
+
+change the permission to have orangehrm owned by apache user
+cd /var/www
+chown -R apache.apache orangehrm
+
+Create a fie "orange.conf" under /etc/httpd/conf.d and paste the below content
+------------------------------------------------------------------------------
+Explanation: Virtual host configuration orangehrm.conf file is added within the /etc/httpd/conf.d directory to host the  

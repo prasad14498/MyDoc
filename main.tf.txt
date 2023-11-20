@@ -1,0 +1,21 @@
+Terraform (Give the file name as main.tf)
+
+To create EC2 instance we need two things:
+1.provider
+2.resource
+
+
+provider "aws" {
+	region = "eu-west-01"
+	access_key = "  "
+	secret_key = "   "
+}
+
+
+resource "aws_instance" {
+	ami = "   "
+	instance_type = "t2.micro"
+	tags = {
+		Name = Terraform EC2"
+	}
+}
